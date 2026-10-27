@@ -1,0 +1,76 @@
+# ============================================================
+# Multimodal Attendance & Engagement Agent — Configuration
+# ============================================================
+
+# --- Video / Camera Settings ---
+video:
+  source: 0                        # 0 = default webcam, or path to video file
+  frame_width: 1280
+  frame_height: 720
+  fps: 30
+  display: true                    # Show live annotated feed
+
+# --- Face Recognition Settings ---
+face_recognition:
+  backend: "opencv"                # deepface backend: opencv | retinaface | mtcnn | ssd
+  model: "VGG-Face"                # deepface model: VGG-Face | ArcFace | Facenet512
+  distance_metric: "cosine"        # cosine | euclidean | euclidean_l2
+  threshold: 0.4                   # Identity match threshold (lower = stricter)
+  known_faces_dir: "data/known_faces"
+  enforce_detection: false         # Don't crash if no face found in enrollment image
+
+# --- Attendance Settings ---
+attendance:
+  presence_threshold_seconds: 30  # Seconds of sustained presence → mark attended
+  min_confidence: 0.60             # Minimum face match confidence
+  log_dir: "data/logs"
+  mark_unknown: true               # Track unknown faces separately
+
+# --- Head Pose Settings ---
+head_pose:
+  attention_yaw_range: [-25, 25]  # Yaw degrees considered "attentive"
+  attention_pitch_range: [-20, 20]# Pitch degrees considered "attentive"
+  distraction_threshold: 5        # Consecutive distracted frames before flagging
+
+# --- Motion / Activity Settings ---
+motion:
+  background_subtractor: "MOG2"   # MOG2 | KNN
+  movement_threshold: 500         # Min contour area to count as movement
+  inactivity_window_seconds: 60   # Seconds of no movement = low activity
+
+# --- Audio Settings ---
+audio:
+  enabled: true
+  device_index: null               # null = default mic
+  sample_rate: 16000
+  chunk_duration_ms: 30           # VAD frame size (10, 20, or 30 ms)
+  vad_aggressiveness: 2           # webrtcvad: 0 (least) to 3 (most aggressive)
+  audio_log_dir: "data/audio_logs"
+
+# --- Engagement Scoring Weights ---
+engagement:
+  attention_weight: 0.50           # Head pose contribution
+  activity_weight: 0.30           # Movement contribution
+  audio_weight: 0.20              # Audio/speech participation contribution
+  update_interval_seconds: 5      # How often to recalculate engagement
+
+# --- AI / LLM Settings ---
+ai:
+  provider: "ollama"               # ollama | rule_based
+  ollama_model: "llama3.2"         # Model name as it appears in `ollama list`
+  ollama_url: "http://localhost:11434"
+  suggestion_interval_seconds: 120 # Generate suggestion every N seconds
+  engagement_alert_threshold: 40  # Score below this triggers a suggestion
+
+# --- Dashboard Settings ---
+dashboard:
+  host: "127.0.0.1"
+  port: 5000
+  debug: false
+  update_interval_ms: 1000        # Frontend polling interval
+
+# --- Report Settings ---
+reports:
+  output_dir: "data/reports"
+  generate_pdf: true
+  generate_html: true

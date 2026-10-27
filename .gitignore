@@ -1,0 +1,78 @@
+# ── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.pyo
+
+# ── Virtual environments ──────────────────────────────
+venv/
+env/
+.venv/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Environment / secrets ─────────────────────────────
+.env
+.env.*
+*.key
+*.pem
+secrets.yaml
+secrets.json
+
+# ── Distribution / packaging ──────────────────────────
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+wheels/
+
+# ── Testing ───────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# ── IDE / editors ─────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Jupyter ───────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── ML model weights (large binaries) ────────────────
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.pb
+*.tflite
+
+# ── Project data & logs (auto-generated) ─────────────
+data/logs/
+data/reports/
+data/audio_logs/
+
+# ── Known faces (personal/sensitive) ─────────────────
+# Uncomment the next line if you don't want to commit face images:
+# data/known_faces/
+
+# ── Node / web (if ever used) ─────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ── OpenCV model cache ────────────────────────────────
+.deepface/
+.keras/
